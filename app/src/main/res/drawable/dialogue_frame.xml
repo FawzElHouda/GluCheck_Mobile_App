@@ -1,0 +1,20 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Speech Bubble Body -->
+    <item>
+        <shape
+            android:shape="rectangle">
+            <solid android:color="@color/b4" />
+            <corners android:radius="59dp" />
+        </shape>
+    </item>
+    <!-- Tail (Arrow) -->
+    <item>
+        <rotate
+            android:fromDegrees="90">
+            <shape
+                android:shape="rectangle">
+                <solid android:color="@color/b4" />
+            </shape>
+        </rotate>
+    </item>
+</layer-list>

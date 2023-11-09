@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:padding="20dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context=".MainActivity">
+    <!-- Start of the top GridLayout for greetings and image -->
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+
+        android:background="@drawable/dialogue_frame">
+
+        <!-- Greeting TextView -->
+        <TextView
+            android:id="@+id/nameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:text="Hi [name],"
+            android:textColor="@color/b1"
+            android:textSize="20dp"
+            android:fontFamily="@font/baloo"/>
+
+        <!-- Message TextView -->
+        <TextView
+            android:id="@+id/messageTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_marginTop="35dp"
+            android:layout_marginLeft="25dp"
+            android:padding="10dp"
+            android:text="how are you feeling today?"
+            android:textColor="@android:color/white"
+            android:textSize="20dp"
+            android:fontFamily="@font/baloo"/>
+
+
+        <ImageView
+            android:layout_width="137dp"
+            android:layout_height="80dp"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_gravity="bottom|end"
+            android:layout_marginTop="15dp"
+            android:paddingLeft="50dp"
+            android:src="@drawable/doctor" />
+    </GridLayout>
+
+    <TextView
+        android:id="@+id/age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/baloo"
+        android:text="@string/age"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/b1"
+        android:textSize="23sp" />
+
+    <SeekBar
+        android:id="@+id/sbAge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:max="120"
+        android:min="10"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/baloo"
+        android:text="Are you fasting?"
+        android:textSize="23sp"
+        android:textColor="@color/b1"
+        android:textStyle="normal" />
+
+    <!-- Radio Buttons for Fasting -->
+    <RadioGroup
+        android:layout_width="372dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/rbtyes"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="Yes"
+            android:textColor="@color/b1"
+            android:textSize="19sp"
+            />
+        <RadioButton
+            android:id="@+id/rbtno"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:checked="false"
+            android:text="No"
+            android:textColor="@color/b1"
+            android:textSize="19sp" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:padding="30dp"
+        android:hint="(Value measured in mmol/l)"
+        android:inputType="numberDecimal"
+        android:textColor="@color/b1">
+    </EditText>
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="CONSULT"
+        android:textSize="18sp"
+        android:padding="15dp"
+        android:onClick="calcul"
+        android:background="@drawable/buttonshape"
+        />
+
+    <!-- Result TextView -->
+    <TextView
+        android:id="@+id/res"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="..."
+        android:textStyle="bold"
+        android:textSize="23sp"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        />
+
+</LinearLayout>
