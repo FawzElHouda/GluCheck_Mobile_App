@@ -1,4 +1,4 @@
-package com.example.glucosemeasure;
+package com.example.glucosemeasure.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -6,6 +6,8 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 
+import com.example.glucosemeasure.R;
+import com.example.glucosemeasure.ViewPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
 public class ConnexionActivity extends AppCompatActivity {
