@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "190439436071",
+    "project_id": "glucheck-6d807",
+    "storage_bucket": "glucheck-6d807.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:190439436071:android:181f80cfeb080def6fc302",
+        "android_client_info": {
+          "package_name": "com.example.glucosemeasure"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOGxb8FHOEHJOON7Yn3gRINwfdAb7PbSo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

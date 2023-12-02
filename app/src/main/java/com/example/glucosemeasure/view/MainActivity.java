@@ -1,7 +1,10 @@
 package com.example.glucosemeasure.view;
 
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,22 +17,46 @@ import android.widget.Toast;
 
 import com.example.glucosemeasure.R;
 import com.example.glucosemeasure.controller.Controller;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 public class MainActivity extends AppCompatActivity {
-    private TextView tvage, tvres;
+    private TextView tvage;
     private SeekBar skage;
     private RadioButton rbf, rbnf;
     private EditText etvalue;
-    private Button bt;
-    private Controller controller = new Controller() ;  
+    private Button bt, logout;
+    private String tvres;
+    FirebaseAuth auth;
+    FirebaseUser user;
+    private boolean fast ;
+
+    private final int  REQUEST_CODE=1;
+    private Controller controller = Controller.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setContentView(R.layout.activity_connexion);
         init();
+        auth=FirebaseAuth.getInstance();
+        user=auth.getCurrentUser();
+        if (user==null){
+            Intent intent = new Intent(getApplicationContext(), Login.class);
+            startActivity(intent);
+            finish();
+        }
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getApplicationContext(),Login.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
 
         skage.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -70,49 +97,36 @@ public class MainActivity extends AppCompatActivity {
                     value = Float.valueOf(etvalue.getText().toString());
 
                     controller.createpatient(age,value,rbf.isChecked()); //user action view --> controller
-                    tvres.setText(controller.getResponse()); // notify controller view --> string
-                    if (rbf.isChecked()) {
-                        if (age >= 13) {
-                            if (value < 5.0)
-                                tvres.setText("Low blood sugar level");
-                            else if (value > 5.0 && value <= 7.2) {
-                                tvres.setText("Normal blood sugar level");
-                            } else {
-                                tvres.setText("Elevated blood glucose level");
-                            }
-                        } else if (age >= 6 && age <= 12) {
-                            if (value < 5.0)
-                                tvres.setText("Low blood sugar level");
-                            else if (value >= 5.0 && value <= 10.0)
-                                tvres.setText("Normal blood sugar level");
-                            else
-                                tvres.setText("Elevated blood glucose level");
-                        } else { // age < 6
-                            if (value < 5.5)
-                                tvres.setText("Low blood sugar level");
-                            else if (value > 5.5 && value <= 10)
-                                tvres.setText("Normal blood sugar level");
-                            else
-                                tvres.setText("Elevated blood glucose level");
-                        }
-                    } else {
-                        if (value < 10.5)
-                            tvres.setText("Low blood sugar level");
-                        else
-                            tvres.setText("Elevated blood glucose level");
-                    }
+
+                    tvres=controller.getResponse(); // notify controller view --> string
+                    resultat();
                 }
             }
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE)
+            if(resultCode == RESULT_CANCELED)
+                Toast.makeText(MainActivity.this,"Error !", Toast.LENGTH_SHORT).show();
+    }
+
     private void init() {
         tvage = (TextView) findViewById(R.id.age);
-        tvres = (TextView) findViewById(R.id.res);
         skage = (SeekBar) findViewById(R.id.sbAge);
         rbf = (RadioButton) findViewById(R.id.rbtyes);
         rbnf = (RadioButton) findViewById(R.id.rbtno);
         etvalue = (EditText) findViewById(R.id.value);
         bt = (Button) findViewById(R.id.btn);
+        logout = (Button) findViewById(R.id.lgout);
+
     }
+    private void  resultat(){
+        Intent intent = new Intent(MainActivity.this, ConsultActivity.class) ;
+        intent.putExtra("res",tvres);
+        startActivityForResult(intent,REQUEST_CODE);
+    }
+
 }

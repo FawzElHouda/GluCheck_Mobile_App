@@ -12,9 +12,19 @@ public class Controller {
     public void createpatient (int age , float value, boolean Isfasting){
         p = new Patient(age, value, Isfasting);
     }
+    private static Controller instance = null ;
+
     //user action view --> controller
-    public Controller(){
+    private Controller(){
         super();
+    }
+
+    public static Controller getInstance()
+    {
+        if (Controller.instance == null)
+                Controller.instance = new Controller();
+        return instance;
+
     }
         public String getResponse() { //notify controller --> view
         return p.getResponse();// notify model --> controller
